@@ -1,0 +1,72 @@
+header {
+	width: 100%;
+	display: block;
+	background: '#000';
+	padding:10px;
+	box-sizing: border-box;
+	background: orangered;
+	& .container {
+		display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    & .menu {
+	    	& a {
+		        color: white;
+		        padding: 16px 32px;
+		        text-align: center;
+		        text-decoration: none;
+		        display: inline-block;
+		        font-size: 16px;
+		        margin: 10px ;
+		        transition-duration: 0.4s;
+		        cursor: pointer;
+		        &:hover {
+			        background-color: #fba29b;
+			        color: white;
+        		}
+	    	}
+	    }
+	    & .profile {
+	    	align-items: center;
+    		display: flex;
+    		& .img-user {
+			    width: 50px;
+			    height: 50px;
+			    border-radius: 100%;
+			    margin: 10px;
+			    cursor: pointer;
+			}
+	    }
+	}
+}
+
+mat-tree-node {
+	cursor: pointer;
+	padding-left: 0px !important;
+	& .mat-expansion-panel {
+		min-width: calc(100% - 20px);
+		margin: 0 10px 20px;
+	}
+}
+
+mat-toolbar {
+	margin-bottom: 20px;
+	& mat-form-field {
+		margin-left: auto;
+		margin-top: 20px;
+	}
+}
+
+form {
+	display: flex;
+	justify-content: space-between;
+	& .input {
+		min-width: 30%;
+		& .field {
+			width: calc(100% - 50px);
+		}
+		& mat-icon {
+			margin-left: 10px;
+		}
+	}
+}

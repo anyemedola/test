@@ -1,0 +1,68 @@
+<header>
+	<div class="container" style="color: #ffffff;">
+
+    <div class="menu">
+      <a href="https://www.gonitro.com/" target="_blank">Nitro, Inc</a> |
+      <a href="#">Rating & Reviews</a> |
+      <a href="https://github.com/anyemedola/post-tree-view" target="_blank">README.md</a>
+    </div>
+
+    <div class="profile">
+      <div>Welcome, Any Medola!</div>
+      <img class="img-user" src="https://avatars.githubusercontent.com/u/61008693?v=4" />
+      <mat-icon fontIcon="settings"></mat-icon>
+    </div>
+
+  </div>
+</header>
+<mat-toolbar>
+  <span>Post Tree View</span>
+  <span class="example-spacer"></span>
+	<mat-form-field appearance="fill">
+	  <mat-label>Group by</mat-label>
+	  <mat-select [(ngModel)]="field" (selectionChange)="changeGroup($event)">
+	    <mat-option *ngFor="let filter of filters" [value]="filter.value">
+	      {{filter.viewValue}}
+	    </mat-option>
+	  </mat-select>
+	</mat-form-field>
+</mat-toolbar>
+<mat-tree [dataSource]="posts" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+	  <mat-expansion-panel class="panel" hideToggle>
+	    <mat-expansion-panel-header>
+	      <mat-panel-title>
+    		{{node.text}}
+	      </mat-panel-title>
+	    </mat-expansion-panel-header>
+	    <form>
+	    	<div class="input">
+				<mat-form-field class="field">
+				    <mat-label>Location</mat-label>
+				    <input matInput [(ngModel)]="node.location" [ngModelOptions]="{standalone: true}">
+				</mat-form-field>
+		      	<mat-icon fontIcon="save" (click)="saveData(node, 'location')"></mat-icon>
+			</div>
+	    	<div class="input">
+				<mat-form-field class="field">
+				    <mat-label>Author</mat-label>
+				    <input matInput [(ngModel)]="node.author" [ngModelOptions]="{standalone: true}">
+				</mat-form-field>
+		      	<mat-icon fontIcon="save" (click)="saveData(node, 'author')"></mat-icon>
+			</div>
+	    	<div class="input">
+				<mat-form-field class="field">
+				    <mat-label>Datetime</mat-label>
+				    <input matInput [value]="getDateTime(node.time)" readonly="true">
+				</mat-form-field>
+			</div>
+		</form>
+	  </mat-expansion-panel>
+  </mat-tree-node>
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.value">
+      <mat-icon class="mat-icon-rtl-mirror">
+        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    {{node.name === 'week' ? 'Week '+node.value : node.value}}
+  </mat-tree-node>
+</mat-tree>
